@@ -1,0 +1,21 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false
+      }
+    ]
+  ],
+  "env": {
+    "development": {
+      "sourceMaps": "inline",
+      "retainLines": true
+    }
+  },
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", {
+      "version": "2022-03"
+    }]
+  ]
+}
