@@ -24,9 +24,12 @@ export const registerResolvers = async directoryName => {
     const resolverFiles = files.filter(file => file.endsWith('-resolvers.js'));
     for (const resolverFile of resolverFiles) {
         const module = await import(resolverFile);
-        Object.keys(module).forEach(key => {
-            const resolver = module[key];
-            registerResolver(key, resolver);
+        const instantiatedResolver = new module.default();
+        Object.getOwnPropertyNames(module.default.prototype).forEach(key => {
+            if (key !== 'constructor') {
+                const resolver = instantiatedResolver[key];
+                registerResolver(key, resolver.bind(instantiatedResolver.self));
+            }
         })
     }
 }
