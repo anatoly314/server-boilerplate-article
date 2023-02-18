@@ -3,8 +3,7 @@ import {authRequired} from "../../decorators/auth-decorator.js";
 class UsersResolvers {
 
     @authRequired("admin")
-    getUsersByName (request) {
-        const {body, authorizedUser} = request;
+    getUsersByName ({body}) {
         const {name} = body;
         const allUsers = [{
             id: 1,
